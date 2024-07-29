@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-dotenv
+langgraph
+langchain
+langchain-openai
+beautifulsoup4 
+WeasyPrint
+requests
+openai 
+pinecone-client 
+langchain-text-splitters 
+tiktoken
+unidecode

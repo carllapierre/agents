@@ -1,0 +1,9 @@
+# Ignore all .env files throughout the project
+**/.env
+.env
+*.code-workspace
+
+# Ignore the data directory in repository/agent
+repository/agent/app/data/
+
+**/__pycache__/

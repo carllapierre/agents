@@ -5,7 +5,7 @@ services:
     ports:
       - "8005:8005"
     volumes:
-      - ./chat-integrations/slack/app
+      - ./chat-integrations/slack:/app
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8005"]
 
   ai-agent:
@@ -13,8 +13,16 @@ services:
     ports:
       - "8004:8004"
     volumes:
-      - ./repository/agent/app
+      - ./repository/agent:/app
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8004"]
+
+  semantha:
+    build: ./repository/semantha
+    ports:
+      - "7004:7004"
+    volumes:
+      - ./repository/semantha:/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "7004"]
 
   ngrok:
     image: ngrok/ngrok

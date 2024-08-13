@@ -8,21 +8,29 @@ services:
       - ./chat-integrations/slack:/app
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8005"]
 
-  ai-agent:
-    build: ./repository/agent
-    ports:
-      - "8004:8004"
-    volumes:
-      - ./repository/agent:/app
-    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8004"]
+  # ai-agent:
+  #   build: ./repository/agent
+  #   ports:
+  #     - "8004:8004"
+  #   volumes:
+  #     - ./repository/agent:/app
+  #   command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8004"]
 
-  semantha:
-    build: ./repository/semantha
+  # semantha:
+  #   build: ./repository/semantha
+  #   ports:
+  #     - "7004:7004"
+  #   volumes:
+  #     - ./repository/semantha:/app
+  #   command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "7004"]
+
+  public-osedea-agent:
+    build: ./repository/public-osedea-agent
     ports:
-      - "7004:7004"
+      - "8009:8009"
     volumes:
-      - ./repository/semantha:/app
-    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "7004"]
+      - ./repository/public-osedea-agent:/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload", "--port", "8009"]
 
   ngrok:
     image: ngrok/ngrok

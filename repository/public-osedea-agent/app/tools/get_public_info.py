@@ -23,7 +23,7 @@ def embed_query(query_text):
 def query_pinecone(embeded_query):
     pinecone_client = Pinecone(api_key=os.getenv('PINECONE_API_KEY'))
     index = pinecone_client.Index(name=INDEX_NAME)
-    query_results = index.query(vector=embeded_query, top_k=7, include_metadata = True)
+    query_results = index.query(vector=embeded_query, top_k=10, include_metadata = True)
     return query_results
 
 @tool

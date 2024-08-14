@@ -4,8 +4,7 @@
 prompts = {
     "system": """
 You're an assistant helping people find public information about Osedea.
-Given the following query submit a question to get information from the public knowledge store.
-If its absolutely irrelevant, don't use a function.  
+Given the following prompt use the get_public_info function to submit a question to get information from the public knowledge store.
 
 - get_public_info: 
     Params: question: the question to get information from the dataset

@@ -27,7 +27,7 @@ jobs:
       - name: Get Changed Services
         id: changed_services
         run: |
-          git diff --name-only HEAD^ HEAD | grep 'Repository/' | awk -F/ '{print $2}' | sort | uniq > services.txt
+          git diff --name-only HEAD^ HEAD | grep 'repository/' | awk -F/ '{print $2}' | sort | uniq > services.txt
           echo "services=$(cat services.txt | tr '\n' ',')" >> $GITHUB_ENV
 
       - name: Deploy Services

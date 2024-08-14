@@ -20,7 +20,7 @@ class AgentStack extends Stack {
 
         const cluster = new ecs.Cluster(this, `${props.envName}-${serviceName}-Cluster`, { vpc });
 
-        const repository = new ecr.Repository(this, `${props.envName}-${serviceName}-Repository`);
+        const repository = new ecr.Repository(this, `${props.envName}-${serviceName}-repository`);
 
         const table = new dynamodb.Table(this, `${props.envName}-${serviceName}-Table`, {
             partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING }
@@ -29,9 +29,9 @@ class AgentStack extends Stack {
         const fargateTaskDefinition = new ecs.FargateTaskDefinition(this, `${props.envName}-${serviceName}-TaskDef`);
 
         const container = fargateTaskDefinition.addContainer(`${props.envName}-${serviceName}-Container`, {
-            image: ecs.ContainerImage.fromAsset(`../Repository/${serviceName}`),
-            memoryLimitMiB: props.envName === 'prod' ? 1024 : 512,
-            logging: new ecs.AwsLogDriver({ streamPrefix: `${props.envName}-${serviceName}-ecs` }),
+            image: ecs.ContainerImage.fromAsset(path.join(__dirname, '../../repository', serviceName)),
+            memoryLimitMiB: 512,
+            logging: new ecs.AwsLogDriver({ streamPrefix: `${serviceName}-ecs` }),
         });
 
         container.addPortMappings({
@@ -52,12 +52,12 @@ class AgentStack extends Stack {
 
 const app = new cdk.App();
 
-const servicesPath = path.join(__dirname, '../Repository');
+const servicesPath = path.join(__dirname, '../../repository');
 const services = fs.readdirSync(servicesPath).filter(f => fs.lstatSync(path.join(servicesPath, f)).isDirectory());
 
 services.forEach(serviceName => {
-    new AgentStack(app, `${serviceName}-Stack-Dev`, serviceName, { envName: 'dev' });
-    new AgentStack(app, `${serviceName}-Stack-Prod`, serviceName, { envName: 'prod' });
+    new AgentStack(app, `${serviceName}-stack-dev`, serviceName, { envName: 'dev' });
+    new AgentStack(app, `${serviceName}-stack-prod`, serviceName, { envName: 'prod' });
 });
 
 app.synth();

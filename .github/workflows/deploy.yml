@@ -36,10 +36,10 @@ jobs:
           do
             if [ "${{ github.ref }}" == "refs/heads/main" ]; then
               # Deploy to production
-              npx cdk deploy ${service}-Stack-Prod --require-approval never
+              npx cdk deploy ${service}-stack-prod --require-approval never
             elif [ "${{ github.ref }}" == "refs/heads/develop" ]; then
               # Deploy to development
-              npx cdk deploy ${service}-Stack-Dev --require-approval never
+              npx cdk deploy ${service}-stack-dev --require-approval never
             fi
           done
         env:

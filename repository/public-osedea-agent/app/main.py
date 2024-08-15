@@ -61,7 +61,7 @@ def call_model(state: MessagesState):
     
     tool_llm = model.bind_tools(tools)
     response = tool_llm.invoke(messages)
-
+    print (response.additional_kwargs["tool_calls"])
     return {"messages": [response]}
 
 def end(state: MessagesState):

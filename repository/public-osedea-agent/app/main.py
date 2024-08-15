@@ -68,7 +68,6 @@ def end(state: MessagesState):
     messages = state['messages']
     last_message = messages[-1]
 
-    print ('End called') 
     return {"messages": [last_message]}
 
 # Define a new graph
